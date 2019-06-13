@@ -25,8 +25,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://my.api/v2/books')
-      .then(response => RemoteData.Success(response.data));
+    fetch('http://my.api/v2/books').then(response => RemoteData.Success(response.data));
   }
 
   render () {
@@ -40,12 +39,53 @@ export default class App extends Component {
           )}
           success={(books) => (
             <ul>
-              { books.map(book => (
-                <li key={book.id}>{book.title}</li>
-              ))}
+              // Display content
             </ul>
           )}
-          />
+          failure={() => (
+            <span>Something went wrong!</span>
+          )}/>
+      </div>
+    )
+  }
+}
+```
+
+## Multiple models
+
+```jsx
+import React, { Component } from 'react';
+import RemoteData from 'remote-data-react';
+
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      books: RemoteData.NotAsked(),
+      authors: RemoteData.NotAsked()
+    };
+  }
+
+  componentDidMount() {
+    fetch('http://my.api/v2/books').then(response => RemoteData.Success(response.data));
+    fetch('http://my.api/v2/authors').then(response => RemoteData.Success(response.data));
+  }
+
+  render () {
+    return (
+      <div>
+        <h1>JavaScript Books</h1>
+        <RemoteData.Case
+          model={RemoteData.join([this.state.books, this.state.authors])}
+          defaults={() => (
+            <span>Loading...</span>
+          )}
+          success={([books, authors]) => {
+            //Display content
+          }}
+          failure={() => (
+            <span>Something went wrong!</span>
+          )}/>
       </div>
     )
   }
