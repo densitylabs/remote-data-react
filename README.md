@@ -112,7 +112,7 @@ export default class App extends Component {
 }
 ```
 
-## Usage with Redux
+## Usage with Redux thunk
 
 ```js
 // actions.js
