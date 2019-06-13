@@ -1,5 +1,5 @@
 {
-  "name": "react-remote-data",
+  "name": "remote-data-react",
   "version": "1.0.0",
   "description": "Promise-based React data loader",
   "author": "Density Labs <info@densitylabs.io>",

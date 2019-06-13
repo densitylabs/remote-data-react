@@ -1,6 +1,6 @@
 {
-  "name": "react-remote-data-example",
-  "homepage": "https://chukitow.github.io/react-remote-data",
+  "name": "remote-data-react-example",
+  "homepage": "https://chukitow.github.io/remote-data-react",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -9,7 +9,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
-    "react-remote-data": "file:.."
+    "remote-data-react": "file:.."
   },
   "scripts": {
     "start": "react-scripts start",

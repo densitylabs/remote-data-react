@@ -1,24 +1,24 @@
-# react-remote-data
+# remote-data-react
 
 >  Promise-based React data loader
 
-[![NPM](https://img.shields.io/npm/v/react-remote-data.svg)](https://www.npmjs.com/package/react-remote-data) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/remote-data-react.svg)](https://www.npmjs.com/package/remote-data-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save react-remote-data
+npm install --save remote-data-react
 ```
 
 ## Basic usage
 
 ```jsx
 import React, { Component } from 'react';
-import RemoteData from 'react-remote-data';
+import RemoteData from 'remote-data-react';
 
 export default class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       books: RemoteData.NotAsked()
     };

@@ -1,6 +1,6 @@
 {
-  "short_name": "react-remote-data",
-  "name": "react-remote-data",
+  "short_name": "remote-data-react",
+  "name": "remote-data-react",
   "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",

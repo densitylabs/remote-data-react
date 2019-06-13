@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import RemoteData from 'react-remote-data'
+import RemoteData from 'remote-data-react'
 
 export default class App extends Component {
   constructor(props) {
