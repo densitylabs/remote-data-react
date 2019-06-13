@@ -1,22 +1,11 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import * as Model from './model';
 
-import styles from './styles.css'
+import RemoteDataCase from './RemoteDataCase';
 
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  }
+const RemoteData = {
+  ...Model,
+  PropType: Model.RemoteDataPropType,
+  Case: RemoteDataCase,
+};
 
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
-}
+export default RemoteData;
