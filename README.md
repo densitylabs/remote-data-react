@@ -25,7 +25,13 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://my.api/v2/books').then(response => RemoteData.Success(response.data))
+    fetch('http://my.api/v2/books')
+    .then(response => this.setState({
+      books: RemoteData.Success(response.data)
+    }))
+    .catch(response => this.setState({
+      books: RemoteData.Failure(response.data.errors)
+    }))
   }
 
   render () {
@@ -67,8 +73,22 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://my.api/v2/books').then(response => RemoteData.Success(response.data))
-    fetch('http://my.api/v2/authors').then(response => RemoteData.Success(response.data))
+    fetch('http://my.api/v2/books')
+    .then(response => this.setState({
+      books: RemoteData.Success(response.data)
+    }))
+    .catch(response => this.setState({
+      books: RemoteData.Failure(response.data.errors)
+    }));
+    
+    
+    fetch('http://my.api/v2/authors')
+    .then(response => this.setState({
+      authors: RemoteData.Success(response.data)
+    }))
+    .catch(response => this.setState({
+      authors: RemoteData.Failure(response.data.errors)
+    }));
   }
 
   render () {
