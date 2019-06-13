@@ -25,7 +25,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://my.api/v2/books').then(response => RemoteData.Success(response.data));
+    fetch('http://my.api/v2/books').then(response => RemoteData.Success(response.data))
   }
 
   render () {
@@ -67,8 +67,8 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://my.api/v2/books').then(response => RemoteData.Success(response.data));
-    fetch('http://my.api/v2/authors').then(response => RemoteData.Success(response.data));
+    fetch('http://my.api/v2/books').then(response => RemoteData.Success(response.data))
+    fetch('http://my.api/v2/authors').then(response => RemoteData.Success(response.data))
   }
 
   render () {
@@ -78,6 +78,99 @@ export default class App extends Component {
         <RemoteData.Case
           model={RemoteData.join([this.state.books, this.state.authors])}
           defaults={() => (
+            <span>Loading...</span>
+          )}
+          success={([books, authors]) => {
+            //Display content
+          }}
+          failure={() => (
+            <span>Something went wrong!</span>
+          )}/>
+      </div>
+    )
+  }
+}
+```
+
+## Usage with Redux
+
+```js
+// actions.js
+import { dispatchPromise } from 'remote-data-react/redux';
+
+const GET_BOOKS = 'GET_BOOKS';
+const GET_AUTHORS = 'GET_AUTHORS';
+
+export const getBooks = () => (dispatch) => {
+  return dispatchPromise({
+    dispatch,
+    promise: Books.getAll(),
+    actionType: GET_AUTHORS,
+    mapSuccess: ({ data }) => data,
+    mapFailure: error => error.response.data,
+  });
+};
+
+export const getAuthors = () => (dispatch) => {
+  return dispatchPromise({
+    dispatch,
+    promise: Authors.getAll(),
+    actionType: GET_AUTHORS,
+    mapSuccess: ({ data }) => data,
+    mapFailure: error => error.response.data,
+  });
+};
+```
+
+```js
+//reducer.js
+import { GET_BOOKS, GET_AUTHORS } from './actions';
+import RemoteData from 'lib/remote-data';
+
+export const INITIAL_STATE = {
+  books: RemoteData.NotAsked(),
+  authors: RemoteData.NotAsked(),
+};
+
+export default (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case GET_BOOKS:
+      return {
+        ...state,
+        books: action.payload,
+      };
+    case GET_AUTHORS:
+      return {
+        ...state,
+        authors: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+```
+
+```jsx
+import React, { Component } from 'react';
+import RemoteData from 'remote-data-react';
+
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  componentDidMount() {
+    this.props.getBooks();
+    this.props.getAuthors();
+  }
+
+  render () {
+    return (
+      <div>
+        <h1>JavaScript Books</h1>
+        <RemoteData.Case
+          model={RemoteData.join([this.props.books, this.props.authors])}
+          loading={() => (
             <span>Loading...</span>
           )}
           success={([books, authors]) => {
