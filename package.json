@@ -2,7 +2,7 @@
   "name": "remote-data-react",
   "version": "1.0.0",
   "description": "Promise-based React data loader",
-  "author": "Density Labs <info@densitylabs.io>",
+  "author": "Density Labs <development@densitylabs.io>",
   "license": "ISC",
   "repository": "https://github.com/densitylabs/remote-data-react",
   "main": "dist/index.js",
